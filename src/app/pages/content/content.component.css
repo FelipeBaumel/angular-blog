@@ -3,7 +3,6 @@
 }
 
 .container__content{
-  border: solid white 2px;
   width: 100%;
   height: 100vh;
 
@@ -27,5 +26,7 @@
 }
 
 .content__description > p{
+  margin-top: 20px;
   color: rgb(174, 174, 174);
+
 }

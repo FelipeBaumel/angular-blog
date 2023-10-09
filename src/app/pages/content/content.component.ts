@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import {dataFake} from '../../data/dataFake'
 
 @Component({
   selector: 'app-content',
@@ -8,11 +9,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ContentComponent implements OnInit {
   @Input()
-  photoCover:string = "https://conteudo.imguol.com.br/c/entretenimento/dd/2018/05/17/viggo-mortensen-como-aragorn-na-trilogia-o-senhor-dos-aneis-1526603479172_v2_4x3.jpg";
+  photoCover:string = "";
   @Input()
-  contentTitle: string="NOTICIA EXEMPLO";
+  contentTitle: string="";
   @Input()
   contentDescription: string="blablabla";
+  private id:string | null = "0";
 
   constructor(
     private route:ActivatedRoute
@@ -20,7 +22,19 @@ export class ContentComponent implements OnInit {
 
   ngOnInit(): void{
     this.route.paramMap.subscribe(value => 
-      console.log(value.get('id'))
+      this.id = value.get('id')
       )
+
+      this.setValueToComponent(this.id)
   };
+
+  setValueToComponent(id: string | null){
+    const result = dataFake.filter(article => article.id == id)[0];
+
+    this.contentTitle = result.title;
+    this.contentDescription = result.description;
+    this.photoCover = result.photoCover;
+    
+   
+  }  
 }
